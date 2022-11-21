@@ -1,0 +1,4 @@
+docker build -t webapp:v0 .
+
+// Application running on port 5001 in container will now be accessible on port 80 of localhost
+docker run -d -p 80:5001 webapp:v0
