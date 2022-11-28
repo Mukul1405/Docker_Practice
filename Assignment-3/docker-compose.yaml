@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  container1:
+    build: Container1\.
+    networks:
+      - flask-app
+    depends_on:
+      - container2
+  container2:
+    container_name: flaskapp
+    build: Container2\.
+    environment:
+      msg : I am from flask container.
+    networks:
+      - flask-app
+
+networks:
+  flask-app:
+    driver: bridge

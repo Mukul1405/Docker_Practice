@@ -1,0 +1,12 @@
+
+WebApp Dockerfile
+
+docker build -t webapp:v0 .
+docker run -d -p 80:5001 webapp:v0  # Application running on port 5001 in container will now be accessible on port 80 of localhost
+
+
+
+MongoApp Dockerfile
+
+docker build -t mongoapp:v0
+docker run -d -p 81:5002 mongoapp:v0
