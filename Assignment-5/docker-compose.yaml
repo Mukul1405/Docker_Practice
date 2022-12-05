@@ -1,0 +1,51 @@
+
+version: '3'
+
+services:
+  web1:
+    build: Mongo/.
+    ports:
+      - 80:5000
+    environment:
+      - username=admin
+      - password=admin
+      - msg=Web1
+      - port=5000
+    networks:
+      - web1_net
+    depends_on:
+      - db
+  web2:
+    build: Mongo/.
+    ports:
+      - 81:5000
+    environment:
+      - username=admin
+      - password=admin
+      - msg=Web2
+      - port=5000
+    networks:
+      - web2_net
+    depends_on:
+      - db
+
+  db:
+    container_name: mongodb
+    image: mongo:4.0.8
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    volumes:
+      - ./mongoVolume:/data/db
+    networks:
+      - web1_net
+      - web2_net
+
+networks:
+  web1_net:
+    driver: bridge
+  web2_net:
+    driver: bridge
